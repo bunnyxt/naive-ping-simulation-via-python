@@ -68,7 +68,7 @@ def reply_ping(data_seq, rawsocket):
         wait_time = time.time() - start_select_time
 
         # timeout
-        if what_ready[0] == []:  
+        if what_ready[0] == []:
             return -1, -1
 
         receive_time = time.time()
@@ -154,10 +154,12 @@ def ping(target_name, count, size):
     # show summary
     print("\n{0}的Ping统计信息：".format(dst_addr))
     print("    数据包：已发送 = {0}，已接收 = {1}，丢失 = {2}（{3}% 丢失），".format(
-        count, receive_num, count - receive_num, round((count - receive_num) / size * 100)))
-    print("往返行程的估计时间（以毫秒为单位）：")
-    print("    最短 = {0}ms，最长 = {1}ms，平均 = {2}ms\n".format(
-        min_time, max_time, round(time_sum / count)))
+        count, receive_num, count - receive_num, round((count - receive_num) / count * 100)))
+    if receive_num > 0:
+        print("往返行程的估计时间（以毫秒为单位）：")
+        print("    最短 = {0}ms，最长 = {1}ms，平均 = {2}ms".format(
+            min_time, max_time, round(time_sum / count)))
+    print("\n")
 
 
 if __name__ == "__main__":
@@ -179,4 +181,4 @@ if __name__ == "__main__":
 
     ping(sys.argv[-1], count, size)
 
-    # By.bunnyxt 2018-11-12
+    # By.bunnyxt 2018-11-13
