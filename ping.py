@@ -19,7 +19,7 @@ def calc_chesksum(data):
 
     if is_odd_number:
         # add last byte as a number if exist
-        sum += (data[-1])
+        sum += data[-1]
 
     # add high 16 digits and low 16 digits until sum shown in 16 digits
     sum = (sum >> 16) + (sum & 0xffff)
@@ -29,7 +29,7 @@ def calc_chesksum(data):
     checksum = ~sum & 0xffff
 
     # host byte sequence to network byte sequence
-    checksum = checksum >> 8 | (checksum << 8 & 0xff00)
+    checksum = (checksum >> 8) | (checksum << 8 & 0xff00)
 
     return checksum
 
@@ -159,7 +159,7 @@ def ping(target_name, count, size):
         print("往返行程的估计时间（以毫秒为单位）：")
         print("    最短 = {0}ms，最长 = {1}ms，平均 = {2}ms".format(
             min_time, max_time, round(time_sum / count)))
-    print("\n")
+    print("")
 
 
 if __name__ == "__main__":
